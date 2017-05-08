@@ -9,7 +9,8 @@
  */
 
 angular.module('pingPongClientApp')
-  .controller('SignUpController', function ($state, RegistrationService) {
+  .controller('SignUpController', function ($state, $rootScope, $timeout,
+                                            RegistrationService) {
     var ctrl = this;
 
     var init = function(){
@@ -28,10 +29,14 @@ angular.module('pingPongClientApp')
       }).then(function() {
         ctrl.busy = false;
         $state.go('leaderboard');
-      }).catch(function(error) {
+        $rootScope.successMessage = "Your Account has been created.";
+        $timeout(function(){
+          $rootScope.successMessage = null;
+        },5000);
+      }).catch(function(errors) {
         ctrl.error = true;
         ctrl.busy = false;
-        ctrl.errorMessages = error.data.messages;
+        ctrl.errorMessages = errors.data;
       });
     };
   });

@@ -2,25 +2,25 @@
 
 /**
  * @ngdoc service
- * @name pingPongClientApp.config
+ * @name pingPongClientApp.Config
  * @description
- * # config
+ * # Config
  * Service in the pingPongClientApp.
  */
 angular.module('pingPongClientApp')
-  .service('config', function () {
+  .factory('Config', function () {
     angular.extend(this, {
       appName: 'Ping Pong Client',
       api: {
         protocol: 'http',
-        server: 'localhost:3000/api',
+        server: 'localhost:3000/v1',
         inactivityLimit: 86400     // seconds
       },
       baseUrl: function() {
         return this.api.protocol + '://' + this.api.server;
       },
       resourceUrl: function() {
-        return this.baseUrl() + '/v1/:resource/:id/:method';
+        return this.baseUrl() + '/:resource/:id/:method';
       }
     });
     return this;

@@ -8,8 +8,8 @@
  * Service in the pingPongClientApp.
  */
 angular.module('pingPongClientApp')
-  .factory('currentSession', function ($cookies) {
-    var unpermittedKeys = [''];
+  .factory('CurrentSession', function ($cookies) {
+    var unpermittedKeys = ['$promise', '$resolved', 'played_matches', 'won_matches'];
     var removeUnpermittedValues = function(object){
       angular.forEach(unpermittedKeys, function(key){
         delete object[key];
@@ -40,7 +40,7 @@ angular.module('pingPongClientApp')
         return $cookies.getObject('currentPlayer') || {};
       },
       authToken: function() {
-        return  this.currentPlayer()['auth-token'];
+        return  this.currentPlayer()['auth_token'];
       }
     };
   });

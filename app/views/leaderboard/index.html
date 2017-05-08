@@ -1,1 +1,28 @@
-<h1>I'm the leaderboard</h1>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">LeaderBoard</h3>
+    <div class="logout-link"><a ng-click="ctrl.logout()">Logout</a>
+    </div>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Score</th>
+        <th>Wins</th>
+        <th>Loses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="leader in ctrl.leaderboards track by $index">
+        <th scope="row">{{$index+1}}</th>
+        <td>{{leader.name}}</td>
+        <td>{{leader.rating}}</td>
+        <td>{{leader.wins}}</td>
+        <td>{{leader.loses}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

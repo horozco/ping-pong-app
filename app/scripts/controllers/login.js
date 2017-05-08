@@ -9,7 +9,8 @@
  */
 
 angular.module('pingPongClientApp')
-  .controller('LoginController', function ($state, SessionService) {
+  .controller('LoginController', function ($state, $rootScope, $timeout,
+                                           SessionService) {
     var ctrl = this;
     var init = function(){
       ctrl.error = false;
@@ -25,14 +26,15 @@ angular.module('pingPongClientApp')
         'password': ctrl.password
       }).then(function() {
         ctrl.busy = false;
-        $state.go('products.feed');
-      }).catch(function(error) {
-        if (error.status === 403) {
-          $state.go('activation', {fromLogin: true});
-        }
+        $state.go('leaderboard');
+        $rootScope.successMessage = "Signed in successfully";
+        $timeout(function(){
+          $rootScope.successMessage = null;
+        },5000);
+      }).catch(function(errors) {
         ctrl.error = true;
         ctrl.busy = false;
-        ctrl.errorMessages = error.data.messages;
+        ctrl.errorMessages = errors.data;
       });
     };
   });

@@ -9,25 +9,43 @@
  */
 
 angular.module('pingPongClientApp')
-  .controller('LeaderboardController', function ($state, LeaderboardService) {
+  .controller('LeaderboardController', function ($state, $rootScope, $timeout,
+                                                 SessionService, LeaderboardService) {
     var ctrl = this;
 
+    var getLeaderBoard = function() {
+      ctrl.error = false;
+      ctrl.busy = true;
+      LeaderboardService.fetch().then(function(data) {
+        ctrl.busy = false;
+        ctrl.leaderboards = data;
+      }).catch(function(error) {
+        ctrl.error = true;
+        ctrl.busy = false;
+        ctrl.errorMessages = error.data ? error.data.messages : error.message;
+      });
+    };
+
     var init = function(){
-      ctrl.getLeaderBoard();
+      getLeaderBoard();
     };
 
     init();
 
-    ctrl.getLeaderBoard = function() {
+    ctrl.logout = function() {
       ctrl.error = false;
       ctrl.busy = true;
-      LeaderboardService.fetch({}).then(function(data) {
+      SessionService.logout().then(function() {
         ctrl.busy = false;
-        ctrl.leaderboard = data;
-      }).catch(function(error) {
+        $state.go('main');
+        $rootScope.successMessage = "Logged out successfully";
+        $timeout(function(){
+          $rootScope.successMessage = null;
+        },5000);
+      }).catch(function(errors) {
         ctrl.error = true;
         ctrl.busy = false;
-        ctrl.errorMessages = error.data.messages;
+        ctrl.errorMessages = errors.data;
       });
     };
   });

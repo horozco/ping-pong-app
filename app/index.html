@@ -31,10 +31,20 @@
                 <li class="active">
                   <a ui-sref="main" >Home</a>
                 </li>
+                <li class="active">
+                  <a ui-sref="matches.played">My Games</a>
+                </li>
               </ul>
             </div>
           </div>
 
+          <div ng-if="successMessage" class="alert alert-success alert-dismissible" role="alert">
+            {{successMessage}}
+          </div>
+
+          <div ng-if="errorMessage" class="alert alert-success alert-dismissible" role="alert">
+            {{errorMessage}}
+          </div>
           <div ui-view="" class="inner cover">
           </div>
 
@@ -81,15 +91,25 @@
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/signup.js"></script>
+        <script src="scripts/controllers/leaderboard.js"></script>
+        <script src="scripts/controllers/matches.js"></script>
         <!-- endfileblock -->
         <!-- fileblock:js directives -->
         <!-- endfileblock -->
         <!-- fileblock:js filters -->
         <!-- endfileblock -->
         <!-- fileblock:js services -->
-        <script src="scripts/services/auth-token-interceptor.js"></script>
         <script src="scripts/services/current-session.js"></script>
+        <script src="scripts/services/auth-token-interceptor.js"></script>
+        <script src="scripts/services/http-request-interceptor.js"></script>
+        <script src="scripts/services/session-interceptor.js"></script>
+        <script src="scripts/services/ping-pong-resource.js"></script>
+        <script src="scripts/services/registration.js"></script>
         <script src="scripts/services/routes.js"></script>
+        <script src="scripts/services/session-service.js"></script>
+        <script src="scripts/services/leaderboard-service.js"></script>
+        <script src="scripts/services/matches-service.js"></script>
+        <script src="scripts/services/players-service.js"></script>
         <!-- endfileblock -->
       <!-- endbuild -->
 

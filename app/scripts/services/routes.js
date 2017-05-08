@@ -12,6 +12,10 @@ angular.module('pingPongClientApp')
     
     $urlRouterProvider.otherwise('/');
     cfpLoadingBarProvider.includeSpinner = false;
+    $httpProvider.interceptors.push('authTokenInterceptor',
+                                    'httpRequestInterceptor',
+                                    'sessionInterceptor'
+                                   );
 
     $stateProvider
     .state('main', {
@@ -35,6 +39,22 @@ angular.module('pingPongClientApp')
       templateUrl: 'views/leaderboard/index.html',
       controller: 'LeaderboardController',
       controllerAs: 'ctrl'
+    })
+    .state('matches', {
+      url: '/matches',
+      abstract: true,
+      templateUrl: 'views/matches/index.html'
+    })
+    .state('matches.new', {
+      url: '/new/:id',
+      templateUrl: 'views/matches/new.html',
+      controller: 'MatchesController',
+      controllerAs: 'ctrl'
+    })
+    .state('matches.played', {
+      url: '/played',
+      templateUrl: 'views/matches/played.html',
+      controller: 'MatchesController',
+      controllerAs: 'ctrl'
     });
-
   });

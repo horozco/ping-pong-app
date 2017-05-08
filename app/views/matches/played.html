@@ -1,0 +1,34 @@
+<div class="panel panel-info" ng-init="ctrl.loadPlayedMatches()">
+  <div class="panel-heading">
+    <h3 class="panel-title">Played Games</h3>
+    <div class="logout-link"><a ng-click="ctrl.logout()">Logout</a>
+    </div>
+  </div>
+
+  <table class="table" ng-if="ctrl.playedMatches.length > 0">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Winner</th>
+        <th>Loser</th>
+        <th>Winner Score</th>
+        <th>Loser Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="match in ctrl.playedMatches track by $index">
+        <th scope="row">{{$index+1}}</th>
+        <td>{{ match.created_at | date : "MMM d, y h:mm:ss a"}}</td>
+        <td>{{ctrl.get_player_name(match.winner_id)}}</td>
+        <td>{{ctrl.get_player_name(match.loser_id)}}</td>
+        <td>{{match.winner_score}}</td>
+        <td>{{match.loser_score}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="panel-body" ng-if="ctrl.playedMatches.length <= 0">
+    <p>You haven't played games yet</p>
+  </div>
+</div>

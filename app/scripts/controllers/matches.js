@@ -9,31 +9,16 @@
  */
 
 angular.module('pingPongClientApp')
-  .controller('MatchesController', function ($state, $q, $rootScope, $timeout,
+  .controller('MatchesController', function ($state, $rootScope, $timeout,
                                               SessionService, PlayerService,
                                               MatchesService, CurrentSession) {
     var ctrl = this;
 
-    var loadPlayerNames = function(){
-      var deferred = $q.defer();
-      ctrl.playerNames = [];
-      PlayerService.index().then(function(data) {
-        ctrl.busy = false;
-        ctrl.players = data;
-        angular.forEach(ctrl.players, function(player){
-          ctrl.playerNames.push({id: player.id, name: player.name});
-        });
-        deferred.resolve();
-      }).catch(function(error) {
-        deferred.reject(error);
-      });
-      return deferred.promise;
-    };
-
     ctrl.loadPlayedMatches = function(){
-      loadPlayerNames().then(function(){
+      PlayerService.playersInfo().then(function(info){
         ctrl.error = false;
         ctrl.busy = true;
+        ctrl.playerNames = info;
         PlayerService.show().then(function(data) {
           ctrl.busy = false;
           ctrl.playedMatches = data.played_matches;

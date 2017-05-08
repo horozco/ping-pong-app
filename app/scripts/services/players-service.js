@@ -24,6 +24,20 @@ angular.module('pingPongClientApp')
         return deferred.promise;
       },
 
+      playersInfo: function(){
+        var deferred = $q.defer();
+        var playerNames = [];
+        this.index().then(function(data) {
+          angular.forEach(data, function(player){
+            playerNames.push({id: player.id, name: player.name});
+          });
+          deferred.resolve(playerNames);
+        }).catch(function(error) {
+          deferred.reject(error);
+        });
+        return deferred.promise;
+      },
+
       show: function(){
         var deferred = $q.defer();
         $rootScope.currentResource = RESOURCE;

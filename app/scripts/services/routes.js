@@ -48,7 +48,7 @@ angular.module('pingPongClientApp')
     .state('matches.new', {
       url: '/new/:id',
       templateUrl: 'views/matches/new.html',
-      controller: 'MatchesController',
+      controller: 'NewMatchesController',
       controllerAs: 'ctrl'
     })
     .state('matches.played', {

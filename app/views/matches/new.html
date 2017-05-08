@@ -1,1 +1,47 @@
-<h1>new</h1>
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">New Game</h3>
+  </div>
+  <div class="panel-body">
+    <div ng-if="ctrl.error" class="alert alert-danger" role="alert">
+      <p>Error creating the game.</p>
+      <ul>
+        <li ng-repeat="(param, error) in ctrl.errorMessages track by $index">
+          <span>{{param}}: {{error}}</span>
+        </li>
+      </ul>
+    </div>
+    <form role="form" name="registerForm" class="form-horizontal" ng-submit="ctrl.createMatch()">
+
+      <div style="margin-bottom: 25px" class="input-group">
+        <select name="winner_id" id="winner_id" ng-model="ctrl.winnerId" required>
+          <option value="">---Select the Winner---</option>
+          <option ng-repeat="player in ctrl.players" value="{{player.id}}">{{player.name}}</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 25px" class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-ok-circle"></i></span>
+        <input required name="winner_score" ng-model="ctrl.winnerScore" type="number" class="form-control" placeholder="Winner Score">
+      </div>
+
+      <div style="margin-bottom: 25px" class="input-group">
+        <select name="loser_id" id="loser_id" ng-model="ctrl.loserId" required>
+          <option value="">---Select the Loser---</option>
+          <option ng-repeat="player in ctrl.players" value="{{player.id}}">{{player.name}}</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 25px" class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-ban-circle"></i></span>
+        <input required name="loser_score" ng-model="ctrl.loserScore" type="number" class="form-control" placeholder="Loser Score">
+      </div>
+
+      <div style="margin-top:10px" class="form-group">
+        <div class="col-sm-12 controls">
+          <input type="submit" ng-disabled="ctrl.busy" class="btn btn-success" value="Create Match" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

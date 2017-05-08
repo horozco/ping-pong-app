@@ -11,7 +11,12 @@ angular.module('pingPongClientApp')
   .factory('PingPongResource', function($resource, $rootScope, Config) {
     var transformRequest = function(data) {
       var request = {};
-      var resourceKey = $rootScope.currentResource.substring(0, $rootScope.currentResource.length - 1);
+      var resourceKey;
+      if ($rootScope.currentResource==='matches') {
+        resourceKey = 'match'; //I know, shame on me :( 
+      }else{
+        resourceKey = $rootScope.currentResource.substring(0, $rootScope.currentResource.length - 1);
+      }
       if (data && data.id) {
         request.id = data.id;
         delete data.id;

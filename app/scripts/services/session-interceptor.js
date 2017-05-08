@@ -19,7 +19,7 @@ angular.module('pingPongClientApp')
           mainView, loginView, signUpView
         ];
 
-        if (!/localhost:3000/.test(config.url)) {
+        if (!/ping-pong-api.herokuapp.com/.test(config.url)) {
           if (nonAllowedViewsOnSession.indexOf(config.url) !== -1) {
             if (CurrentSession.authToken()) {
               $timeout(function(){

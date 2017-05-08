@@ -12,15 +12,15 @@ angular.module('pingPongClientApp')
     angular.extend(this, {
       appName: 'Ping Pong Client',
       api: {
-        protocol: 'http',
-        server: 'localhost:3000/v1',
+        protocol: 'https',
+        server: 'ping-pong-api.herokuapp.com/',
         inactivityLimit: 86400     // seconds
       },
       baseUrl: function() {
         return this.api.protocol + '://' + this.api.server;
       },
       resourceUrl: function() {
-        return this.baseUrl() + '/:resource/:id/:method';
+        return this.baseUrl() + 'v1/:resource/:id/:method';
       }
     });
     return this;
